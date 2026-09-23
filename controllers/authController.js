@@ -25,25 +25,16 @@ const handleLogin = async (req, res) => {
       const accessToken = jwt.sign(
         {'username': foundUser.username},
         process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn: '30m'}
+        {expiresIn: '7d'}
       )
-      const refreshToken = jwt.sign(
-        {'username': foundUser.username},
-        process.env.REFRESH_TOKEN_SECRET,
-        {expiresIn: '1d'}
-      )
-      foundUser.refreshToken = refreshToken
       await foundUser.save()
       const cookieOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       }
-      
-      res.cookie('jwt', refreshToken, {...cookieOptions, maxAge: 24 * 60* 60 * 1000})
       res.json({accessToken})
-    }
-        
+    }    
     else {
             return res.status(401).json({message: "Invalid email or password"}) //unauthorized
         } 

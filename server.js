@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const path = require('path')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const mongoSanitize = require('express-mongo-sanitize')
@@ -42,8 +41,6 @@ app.use(cookieparser())
 
 app.use('/register', authLimiter, require('./routes/register'))
 app.use('/auth', authLimiter, require('./routes/authRoutes'))
-app.use('/refresh', require('./routes/refresh'))
-app.use('/logout', require('./routes/logout'))
 
 app.use('/contact', require('./routes/contactRoutes'))
 
