@@ -1,5 +1,5 @@
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://adeyemis-portfolio.onrender.com',
+    'https://adeyemi-portfolio-beige.vercel.app',
 ]
 module.exports = allowedOrigins
